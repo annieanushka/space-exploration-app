@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Untitled-2.css">
+</head>
+<body>
+
+    <div class="neon-quiz-button-container">
+        <a href="planetsquiz.html">
+          <button class="neon-quiz-button">🚀 Start Quiz</button>
+        </a>
+      </div>
+      <div class="neon-ColoringGame-button-container">
+        <a href="planetsGame.html">
+          <button class="neon-quiz-button">🎨Start Your Masterpiece</button>
+        </a>
+      </div>
+      
+
+    <!-- carousel -->
+    <div class="carousel">
+        <!-- list item -->
+        <div class="list">
+            <div class="item">
+                <img src="mercury2.jpg">
+                <div class="content">
+                    <div class="title">EXPLORE</div>
+                    <div class="topic">PLANETS</div>
+                    <div class="des">
+                        <!-- lorem 50 -->
+                        ☀️ Mercury is the closest planet to the Sun.<br>
+                        🌎 It’s the smallest planet in our solar system.<br>
+                        🏃‍♂️ It moves around the Sun very fast – just 88 days!<br>
+                        🌡️ It’s super hot in the day and very cold at night.<br>
+                        🌕 Mercury has lots of holes on it called craters.<br>
+                        🌌 It doesn’t have any moons or rings.<br>
+                        👀 You can only see Mercury at sunrise or sunset.</br>
+                        🧲 It has a small magnetic field like Earth.
+                    </div>
+                    <div class="buttons">
+                        <button>SEE MORE</button>
+                   
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="venus2.png">
+                <div class="content">
+                   
+                    <div class="title">EXPLORE</div>
+                    <div class="topic">PLANETS</div>
+                    <div class="des">
+                         🔥 Venus is the hottest planet – hotter than Mercury!<br>
+                         🟡 It's the second planet from the Sun.<br>
+                         ☁️ Venus has thick clouds that trap heat.<br>
+                         🔁 One day on Venus is longer than its year!<br>
+                         🔄 It spins the opposite way compared to most planets.<br>
+                         🌕 Venus is almost the same size as Earth.<br>
+                         🌟 It's super bright and can be seen at sunrise or sunset.<br>
+                         🚫 Venus has no moons or rings.<br>
+                        
+                        
+                    </div>
+                    <div class="buttons">
+                        <button>SEE MORE</button>
+                     
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="earth2.jpg">
+                <div class="content">
+                  
+                    <div class="title">EXPLORE</div>
+                    <div class="topic">PLANETS</div>
+                    <div class="des">
+                        🌍 Earth is the third planet from the Sun.<br>
+                        🌎 It’s the only planet known to have life.<br>
+                        🌱 Earth has plants, animals, and people living on it.<br>
+                        🌧️ Earth has weather like rain, snow, and wind.<br>
+                        🌞 Earth orbits the Sun in about 365 days.<br>
+                        🌑 Earth has one moon that orbits it.<br>
+                        🌊 Most of Earth is covered by water – oceans, lakes, and rivers.<br>
+                        ⛅ Earth has different seasons because of its tilted axis.<br>
+                        
+                    </div>
+                    <div class="buttons">
+                        <button>SEE MORE</button>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="mars2.webp">
+                <div class="content">
+                  
+                    <div class="title">EXPLORE</div>
+                    <div class="topic">PLANETS</div>
+                    <div class="des">
+                        🔴 Mars is called the "Red Planet" because of its reddish surface.<br>
+                        🌑 Mars is the fourth planet from the Sun.<br>
+                        🪐 Mars has two small moons, Phobos and Deimos.<br>
+                        💨 Mars has a thin atmosphere, so it’s very cold there.<br>
+                        🌋 Mars has the largest volcano in the solar system, Olympus Mons.<br>
+                        🌒 A day on Mars is just a little longer than a day on Earth.<br>
+                        💧 Scientists think there may have been water on Mars in the past.<br>
+                        🚀 Mars is a target for space missions to learn more about the planet.<br>
+                        
+                    </div>
+                    <div class="buttons">
+                        <button>SEE MORE</button>
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="jupiter bg.jpg">
+                <div class="content">
+                   
+                    <div class="title">EXPLORE</div>
+                    <div class="topic">PLANETS</div>
+                    <div class="des">
+                        🟤 Jupiter is the largest planet in our solar system.<br>
+                        🌪️ Jupiter has a giant storm called the Great Red Spot, which has been raging for hundreds of years.<br>
+                        💨 Jupiter is made mostly of gas, so it doesn't have a solid surface.<br>
+                        🌑 Jupiter has 79 known moons, including Ganymede, the largest moon in the solar system.<br>
+                        🚀 Jupiter has a very strong magnetic field and many rings made of dust.<br>
+                        🌞 It takes 12 Earth years for Jupiter to orbit the Sun.<br>
+                        💨 Jupiter spins very fast, and a day on
+                        
+                    </div>
+                    <div class="buttons">
+                        <button>SEE MORE</button>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="satu.jpg">
+                <div class="content">
+                    
+                    <div class="title">EXPLORE</div>
+                    <div class="topic">PLANETS</div>
+                    <div class="des">
+                        💫 Saturn is the second-largest planet in our solar system.<br>
+                        💍 Saturn is famous for its beautiful rings, which are made of ice and rock.<br>
+                        🌑 Saturn has 83 known moons, with Titan being the largest.<br>
+                        🌞 A year on Saturn is about 29 Earth years, but a day is just 10.7 hours long.<br>
+                        🌬️ Saturn is made mostly of gas, so it doesn’t have a solid surface.<br>
+                        🔄 Saturn’s rings are constantly changing and moving due to its strong gravity.<br>
+                        🛸 Saturn has been visited by many space missions, including NASA’s Cassini spacecraft.<br>
+                        🧊 Saturn’s rings are the most complex and largest in the entire solar system.<br>
+                        
+
+                    </div>
+                    <div class="buttons">
+                        <button>SEE MORE</button>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="uranus 2.webp">
+                <div class="content">
+                    
+                    <div class="title">EXPLORE</div>
+                    <div class="topic">PLANETS</div>
+                    <div class="des">
+                        🌍 Uranus is the seventh planet from the Sun.<br>
+                        🛸 Uranus is a gas giant, which means it’s made mostly of hydrogen and helium.<br>
+                        🌑 Uranus has 27 known moons, with Titania being the largest.<br>
+                        🔄 Uranus spins on its side, which makes it very unique compared to other planets.<br>
+                        🌞 A day on Uranus lasts only 17 hours and 14 minutes.<br>
+                        🌕 Uranus has a faint system of rings, but they are not as bright as Saturn’s.<br>
+                        ❄️ Uranus is very cold, with temperatures reaching -224°C (-371°F).<br>
+                        🚀 Uranus has been visited only by NASA's Voyager 2 spacecraft.<br>
+                        
+                    </div>
+                    <div class="buttons">
+                        <button>SEE MORE</button>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="neptunebg.jpg">
+                <div class="content">
+                    <div class="title">EXPLORE</div>
+                    <div class="topic">PLANETS</div>
+                    <div class="des">
+                        🌌 Neptune is the eighth and farthest planet from the Sun.<br>
+                        🌑 Neptune is a gas giant, made mostly of hydrogen, helium, and water.<br>
+                        🌬️ Neptune has the strongest winds in the solar system – they can reach speeds of 2,100 km/h (1,300 mph)!<br>
+                        🌑 Neptune has 14 known moons, with Triton being the largest.<br>
+                        🔵 Neptune is known for its beautiful blue color, caused by methane in its atmosphere.<br>
+                        ❄️ Neptune is extremely cold, with temperatures around -214°C (-353°F).<br>
+                        🌀 Neptune has a big storm called the Great Dark Spot, similar to Jupiter’s Great Red Spot.<br>
+                        🚀 Neptune has only been visited by NASA’s Voyager 2 spacecraft, which flew by it in 1989.<br>
+                        
+                    </div>
+                    <div class="buttons">
+                        <button>SEE MORE</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- list thumnail -->
+        <div class="thumbnail">
+            <div class="item">
+                <img src="mercurycute.webp">
+                <div class="content">
+                    <div class="title">
+                        1
+                    </div>
+                    <div class="description">
+                        MERCURY
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="venus-cute.jpg">
+                <div class="content">
+                    <div class="title">
+                        2
+                    </div>
+                    <div class="description">
+                       VENUS
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="cute-earth.gif">
+                <div class="content">
+                    <div class="title">
+                       3
+                    </div>
+                    <div class="description">
+                      EARTH
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="marscute.gif">
+                <div class="content">
+                    <div class="title">
+                        4
+                    </div>
+                    <div class="description">
+                       MARS
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="juppu.gif">
+                <div class="content">
+                    <div class="title">
+                        5
+                    </div>
+                    <div class="description">
+                       JUPITER
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="sattt.gif">
+                <div class="content">
+                    <div class="title">
+                        6
+                    </div>
+                    <div class="description">
+                       SATURN
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="uranus-sad.gif.crdownload">
+                <div class="content">
+                    <div class="title">
+                        7
+                    </div>
+                    <div class="description">
+                        URANUS
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="neptunecute.gif">
+                <div class="content">
+                    <div class="title">
+                        8
+                    </div>
+                    <div class="description">
+                        NEPTUNE
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- next prev -->
+
+        <div class="arrows">
+            <button id="prev">></button>
+            <button id="next">></button>
+        </div>
+        <!-- time running -->
+        <div class="time"></div>
+    </div>
+    
+<!-- Modal -->
+<div id="planetModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="planetName"></h2>
+      <div id="planetImages" class="modal-images"></div>
+    </div>
+  </div>
+
+    <script src="Untitled-3.js"></script>
+</body>
+</html>
