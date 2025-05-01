@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Space Drawing Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #000014;
+      background-image: url('G.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      color: white;
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.6);
+      margin-top: 20px;
+      animation: glowing 1.5s infinite alternate;
+    }
+
+    p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem;
+      color: #ffcc00;
+      text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.5);
+      margin: 10px 0;
+    }
+
+    .palette {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 15px;
+      gap: 8px;
+    }
+
+    .color {
+      width: 30px;
+      height: 30px;
+      border: 2px solid white;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    #colorName {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+
+    .buttons, .tools {
+      margin: 15px 0;
+    }
+
+    .buttons button, .tools select {
+      background-color: #111;
+      border: 2px solid white;
+      color: white;
+      padding: 8px 15px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: background-color 0.2s;
+    }
+
+    .buttons button:hover, .tools select:hover {
+      background-color: #333;
+    }
+
+    #canvasContainer {
+      position: relative;
+      display: inline-block;
+      text-align: center;
+    }
+
+    canvas {
+      border: 2px solid white;
+      background-image: url('c.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 700px;
+      height: 500px;
+      touch-action: none;
+      cursor: crosshair;
+    }
+
+    @keyframes glowing {
+      0% { text-shadow: 0 0 5px #0ff; }
+      100% { text-shadow: 0 0 20px #0ff; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🪐 Space Drawing Game</h1>
+  <p>Pick a color and draw on the canvas!</p>
+
+  <div class="palette">
+    <div class="color" style="background-color: red;" onclick="selectColor('red')"></div>
+    <div class="color" style="background-color: orange;" onclick="selectColor('orange')"></div>
+    <div class="color" style="background-color: yellow;" onclick="selectColor('yellow')"></div>
+    <div class="color" style="background-color: lime;" onclick="selectColor('lime')"></div>
+    <div class="color" style="background-color: cyan;" onclick="selectColor('cyan')"></div>
+    <div class="color" style="background-color: pink;" onclick="selectColor('pink')"></div>
+    <div class="color" style="background-color: blue;" onclick="selectColor('blue')"></div>
+    <div class="color" style="background-color: purple;" onclick="selectColor('purple')"></div>
+    <div class="color" style="background-color: brown;" onclick="selectColor('brown')"></div>
+    <div class="color" style="background-color: white;" onclick="selectColor('white')"></div>
+    <div class="color" style="background-color: black;" onclick="selectColor('black')"></div>
+  </div>
+
+  <p>Selected Color: <span id="colorName">None</span></p>
+
+  <div class="tools">
+    <label for="brushSize">🖌️ Brush Size:</label>
+    <select id="brushSize" onchange="updateBrushSize()">
+      <option value="2">Small</option>
+      <option value="4" selected>Medium</option>
+      <option value="8">Large</option>
+    </select>
+  </div>
+
+  <div class="buttons">
+    <button onclick="undoLast()">↩️ Undo</button>
+    <button onclick="redoLast()">🔁 Redo</button>
+    <button onclick="clearCanvas()">🧹 Clear</button>
+    <button onclick="downloadCanvas()">📥 Download</button>
+  </div>
+
+  <div id="canvasContainer">
+    <canvas id="drawingCanvas" width="700" height="500"></canvas>
+  </div>
+
+  <script>
+    let currentColor = 'black';
+    let brushSize = 4;
+    let drawing = false;
+    let paths = [];
+    let redoStack = [];
+    let currentPath = [];
+
+    const canvas = document.getElementById("drawingCanvas");
+    const ctx = canvas.getContext("2d");
+    const colorName = document.getElementById("colorName");
+
+    function selectColor(color) {
+      currentColor = color;
+      colorName.textContent = color;
+    }
+
+    function updateBrushSize() {
+      brushSize = parseInt(document.getElementById("brushSize").value);
+    }
+
+    function startDrawing(e) {
+      drawing = true;
+      currentPath = [];
+      redoStack = [];
+      draw(e);
+    }
+
+    function stopDrawing() {
+      if (drawing && currentPath.length > 0) {
+        paths.push([...currentPath]);
+      }
+      drawing = false;
+      ctx.beginPath();
+    }
+
+    function draw(e) {
+      if (!drawing) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+      const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+
+      ctx.lineWidth = brushSize;
+      ctx.lineCap = "round";
+      ctx.strokeStyle = currentColor;
+
+      ctx.lineTo(x, y);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+
+      currentPath.push({ x, y, color: currentColor, size: brushSize });
+    }
+
+    function redrawAll() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const path of paths) {
+        ctx.beginPath();
+        for (let i = 0; i < path.length; i++) {
+          const { x, y, color, size } = path[i];
+          ctx.strokeStyle = color;
+          ctx.lineWidth = size;
+          ctx.lineCap = "round";
+          if (i === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        ctx.stroke();
+      }
+      ctx.beginPath();
+    }
+
+    function undoLast() {
+      if (paths.length > 0) {
+        const undone = paths.pop();
+        redoStack.push(undone);
+        redrawAll();
+      }
+    }
+
+    function redoLast() {
+      if (redoStack.length > 0) {
+        const redone = redoStack.pop();
+        paths.push(redone);
+        redrawAll();
+      }
+    }
+
+    function clearCanvas() {
+      paths = [];
+      redoStack = [];
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function downloadCanvas() {
+      const link = document.createElement('a');
+      link.download = 'space_drawing.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+
+    // Mouse Events
+    canvas.addEventListener("mousedown", startDrawing);
+    canvas.addEventListener("mouseup", stopDrawing);
+    canvas.addEventListener("mouseout", stopDrawing);
+    canvas.addEventListener("mousemove", draw);
+
+    // Touch Events
+    canvas.addEventListener("touchstart", startDrawing);
+    canvas.addEventListener("touchend", stopDrawing);
+    canvas.addEventListener("touchcancel", stopDrawing);
+    canvas.addEventListener("touchmove", draw);
+  </script>
+</body>
+</html>
