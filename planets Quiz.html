@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🚀 Space Exploration Quiz</title>
+
+  <!-- Google Font: Orbitron -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Vanta + Three.js for animated background -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #0f0f2f;
+    }
+
+    #vanta-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+    }
+
+    .quiz-container {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      border-radius: 20px;
+      width: 500px;
+      max-width: 90%;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.6),
+                  0 0 40px rgba(0, 255, 255, 0.4),
+                  0 0 60px rgba(0, 255, 255, 0.2);
+      z-index: 1;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+      animation: pulseGlow 3s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 20px #00ffff, 0 0 40px rgba(0, 255, 255, 0.3); }
+      50% { box-shadow: 0 0 30px #00ffff, 0 0 60px rgba(0, 255, 255, 0.5); }
+      100% { box-shadow: 0 0 20px #00ffff, 0 0 40px rgba(0, 255, 255, 0.3); }
+    }
+
+    .quiz-header {
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      color: #00ffff;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 0.8rem;
+    }
+
+    label {
+      cursor: pointer;
+      padding: 0.4rem 0.6rem;
+      display: inline-block;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .correct label {
+      background-color: #4caf50;
+      color: #fff;
+    }
+
+    .wrong label {
+      background-color: #f44336;
+      color: #fff;
+    }
+
+    button {
+      background-color: #00bcd4;
+      color: #fff;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+      margin-right: 10px;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #008ba3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Vanta Background -->
+  <div id="vanta-bg"></div>
+
+  <!-- Quiz Box -->
+  <div class="quiz-container" id="quiz">
+    <div class="quiz-header">
+      <h2 id="question">Loading...</h2>
+      <ul>
+        <li><input type="radio" name="answer" id="a" class="answer" /><label for="a" id="a_text">Option A</label></li>
+        <li><input type="radio" name="answer" id="b" class="answer" /><label for="b" id="b_text">Option B</label></li>
+        <li><input type="radio" name="answer" id="c" class="answer" /><label for="c" id="c_text">Option C</label></li>
+        <li><input type="radio" name="answer" id="d" class="answer" /><label for="d" id="d_text">Option D</label></li>
+      </ul>
+    </div>
+    <button id="prev">Previous</button>
+    <button id="submit">Submit</button>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+   const quizData = [
+  {
+    question: "Which planet is known as the Red Planet?",
+    a: "Earth", b: "Venus", c: "Mars", d: "Jupiter", correct: "c"
+  },
+  {
+    question: "Who was the first person to walk on the Moon?",
+    a: "Buzz Aldrin", b: "Neil Armstrong", c: "Yuri Gagarin", d: "Michael Collins", correct: "b"
+  },
+  {
+    question: "Which galaxy is Earth located in?",
+    a: "Andromeda", b: "Whirlpool", c: "Milky Way", d: "Sombrero", correct: "c"
+  },
+  {
+    question: "Which planet has the most moons?",
+    a: "Mars", b: "Saturn", c: "Neptune", d: "Uranus", correct: "b"
+  },
+  {
+    question: "What is the name of NASA’s most famous space telescope?",
+    a: "Kepler", b: "Voyager", c: "Hubble", d: "Galileo", correct: "c"
+  },
+  {
+    question: "What is the name of Earth's moon?",
+    a: "Luna", b: "Phobos", c: "Titan", d: "Io", correct: "a"
+  },
+  {
+    question: "Which planet is closest to the Sun?",
+    a: "Earth", b: "Venus", c: "Mercury", d: "Mars", correct: "c"
+  },
+  {
+    question: "Which planet is known for its rings?",
+    a: "Jupiter", b: "Saturn", c: "Neptune", d: "Uranus", correct: "b"
+  },
+  {
+    question: "What is the name of the first artificial satellite sent into space?",
+    a: "Sputnik", b: "Apollo", c: "Explorer", d: "Vostok", correct: "a"
+  },
+  {
+    question: "What is the name of the red spot on Jupiter?",
+    a: "The Great Spot", b: "The Red Storm", c: "The Great Red Spot", d: "The Red Eye", correct: "c"
+  },
+  {
+    question: "Which planet is known as the ‘Gas Giant’?",
+    a: "Mercury", b: "Earth", c: "Jupiter", d: "Pluto", correct: "c"
+  },
+  {
+    question: "What is the term for a group of stars that form a pattern in the sky?",
+    a: "Galaxy", b: "Constellation", c: "Nebula", d: "Meteor", correct: "b"
+  },
+  {
+    question: "What is the name of the NASA rover that landed on Mars in 2021?",
+    a: "Curiosity", b: "Perseverance", c: "Opportunity", d: "Spirit", correct: "b"
+  },
+  {
+    question: "Which planet has the longest day?",
+    a: "Venus", b: "Jupiter", c: "Saturn", d: "Mars", correct: "a"
+  },
+  {
+    question: "What is the name of the first man-made object to reach space?",
+    a: "Apollo 11", b: "Sputnik 1", c: "Voyager 1", d: "Explorer 1", correct: "b"
+  }
+];
+
+
+    const quiz = document.getElementById("quiz");
+    const answerEls = document.querySelectorAll(".answer");
+    const questionEl = document.getElementById("question");
+    const a_text = document.getElementById("a_text");
+    const b_text = document.getElementById("b_text");
+    const c_text = document.getElementById("c_text");
+    const d_text = document.getElementById("d_text");
+    const submitBtn = document.getElementById("submit");
+    const prevBtn = document.getElementById("prev");
+
+    let currentQuiz = 0;
+    let score = 0;
+    let selectedAnswers = Array(quizData.length).fill(null);
+
+    loadQuiz();
+
+    function loadQuiz() {
+      deselectAnswers();
+
+      const currentQuizData = quizData[currentQuiz];
+      questionEl.innerText = currentQuizData.question;
+      a_text.innerText = currentQuizData.a;
+      b_text.innerText = currentQuizData.b;
+      c_text.innerText = currentQuizData.c;
+      d_text.innerText = currentQuizData.d;
+
+      const selected = selectedAnswers[currentQuiz];
+      if (selected) {
+        document.getElementById(selected).checked = true;
+      }
+
+      prevBtn.style.display = currentQuiz === 0 ? "none" : "inline-block";
+    }
+
+    function deselectAnswers() {
+      answerEls.forEach((el) => {
+        el.checked = false;
+        el.parentElement.classList.remove("correct", "wrong");
+      });
+    }
+
+    function getSelected() {
+      let answer = null;
+      answerEls.forEach((el) => {
+        if (el.checked) answer = el.id;
+      });
+      return answer;
+    }
+
+    submitBtn.addEventListener("click", () => {
+      const selected = getSelected();
+      if (selected) {
+        selectedAnswers[currentQuiz] = selected;
+        const correct = quizData[currentQuiz].correct;
+
+        answerEls.forEach((el) => {
+          const parent = el.parentElement;
+          if (el.id === correct) {
+            parent.classList.add("correct");
+          } else if (el.id === selected) {
+            parent.classList.add("wrong");
+          }
+        });
+
+        if (selected === correct) score++;
+
+        setTimeout(() => {
+          currentQuiz++;
+          if (currentQuiz < quizData.length) {
+            loadQuiz();
+          } else {
+            quiz.innerHTML = `
+              <h2>You scored ${score} out of ${quizData.length}!</h2>
+              <button onclick="location.reload()">Try Again</button>
+            `;
+          }
+        }, 1500);
+      }
+    });
+
+    prevBtn.addEventListener("click", () => {
+      if (currentQuiz > 0) {
+        currentQuiz--;
+        loadQuiz();
+      }
+    });
+  </script>
+
+  <!-- Vanta Background Script -->
+  <script>
+    VANTA.NET({
+      el: "#vanta-bg",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.0,
+      scaleMobile: 1.0,
+      color: 0x00ffff,
+      backgroundColor: 0x0f0f2f
+    });
+  </script>
+</body>
+</html>
